@@ -1,60 +1,61 @@
+"""
+Module for launching formater
+"""
 #!/usr/bin/env python3
 import sys
 from enum import Enum, auto, unique
 from typing import List, Dict, Callable
 
+
 @unique
 class Style(Enum):
+    """
+    Class for styles logic
+    """
     HASH_BORDER = auto()
     PLAIN_TEXT = auto()
     AT_SIGN = auto()
-    
+
     @staticmethod
     def all_styles() -> list:
-        styles = [
-            Style.HASH_BORDER, 
-            Style.PLAIN_TEXT, 
+        """
+        Function realizes style logic
+        """
+        existing_styles = [
+            Style.HASH_BORDER,
+            Style.PLAIN_TEXT,
             Style.AT_SIGN,
         ]
-        return styles
+        return existing_styles
 
-def show_style(style: Style, user_input: str):
+
+def show_style(chosen_style: Style, raw_input: str):
+    """
+    Format raw_input with chosen style
+    """
     def show_plain(text: str):
         print(text)
+
     def show_hashborder(text: str):
         print(f'###\n{text}\n###')
+
     def show_at_sign(text: str):
         print(f'@@@@ {text} @@@')
+
     style_table: Dict[Style, Callable] = {
         Style.PLAIN_TEXT: show_plain,
         Style.HASH_BORDER: show_hashborder,
         Style.AT_SIGN: show_at_sign,
     }
-    styler: Callable = style_table.get(style, Style.PLAIN_TEXT)
-    styler(user_input)
+    styler: Callable = style_table.get(chosen_style, Style.PLAIN_TEXT)
+    styler(raw_input)
 
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         print("Не переданы аргументы")
         sys.exit(1)
-    user_input = " ".join(sys.argv[1:])
+    USER_INPUT = " ".join(sys.argv[1:])
     styles: List[Style] = Style.all_styles()
-    while True:
-        menu = '\n'.join(
-            f'{index + 1}. {style}' for index, style in enumerate(styles)
-        )
-        print(menu)
-        chosen_style = input('> ')
-        if chosen_style.strip().lower() == 'exit':
-            print('Прерывание исполнения программы')
-            sys.exit(0)
-        if not chosen_style.isdigit():
-            print('Введите корректный номер')
-            continue
-        chosen_style_num = int(chosen_style)
-        if not 0 < chosen_style_num <= len(styles):
-            print('Неправильно выбран номер')
-        style: Style = styles[chosen_style_num - 1]
-        show_style(style, user_input)
-    print(user_input)
+    style: Style = styles[0]
+    show_style(style, USER_INPUT)
