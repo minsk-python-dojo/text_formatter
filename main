@@ -33,7 +33,7 @@ def show_style(style: Style, user_input: str):
     styler: Callable = style_table.get(style, Style.PLAIN_TEXT)
     styler(user_input)
 
-
+"""
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         print("Не переданы аргументы")
@@ -58,3 +58,4 @@ if __name__ == '__main__':
         style: Style = styles[chosen_style_num - 1]
         show_style(style, user_input)
     print(user_input)
+"""
