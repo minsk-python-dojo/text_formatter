@@ -2,17 +2,7 @@
 """
 Module for launching formater
 """
-import sys
-from typing import List 
-
-from formatter import Style, show_style 
-
+from cli import init_argparser
 
 if __name__ == '__main__':
-    if len(sys.argv) <= 1:
-        print("Не переданы аргументы")
-        sys.exit(1)
-    USER_INPUT = " ".join(sys.argv[1:])
-    styles: List[Style] = Style.all_styles()
-    style: Style = styles[0]
-    show_style(style, USER_INPUT)
+    init_argparser()

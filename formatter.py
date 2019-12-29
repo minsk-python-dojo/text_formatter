@@ -5,6 +5,7 @@ Module for formatter logic
 from enum import Enum, auto, unique
 from typing import List, Dict, Callable
 
+
 @unique
 class Style(Enum):
     """
@@ -45,5 +46,5 @@ def show_style(chosen_style: Style, raw_input: str):
         Style.HASH_BORDER: show_hashborder,
         Style.AT_SIGN: show_at_sign,
     }
-    styler: Callable = style_table.get(chosen_style, Style.PLAIN_TEXT)
+    styler: Callable = style_table.get(chosen_style, show_plain)
     styler(raw_input)

@@ -3,3 +3,4 @@ venv/
 .idea/
 *.pyc
 *.swp
+.mypy_cache/
