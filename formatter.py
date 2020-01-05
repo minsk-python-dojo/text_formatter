@@ -15,24 +15,20 @@ class Style(Enum):
     PLAIN_TEXT = auto()
     AT_SIGN = auto()
 
-    @staticmethod
-    def all_styles() -> list:
-        """
-        Function realizes style logic
-        """
-        existing_styles = [
+
+class Styles:
+    STYLE_MAPPING = {
+        style.name.lower(): style
+        for style in [
             Style.HASH_BORDER,
             Style.PLAIN_TEXT,
             Style.AT_SIGN,
         ]
-        return existing_styles
+    }
 
-    @staticmethod
-    def from_str(style_name: str):
-        for style in Style.all_styles():
-            if style_name == style.name.lower():
-                return style
-        return None
+    @classmethod
+    def get_style_by_name(cls, style_name: str):
+        return cls.STYLE_MAPPING.get(style_name)
 
 
 def show_style(chosen_style: Style, raw_input: str):

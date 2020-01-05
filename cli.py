@@ -1,21 +1,19 @@
 import argparse
 from typing import List
 
-from formatter import Style, show_style
+from formatter import Styles, show_style
 
 
 def show_all_styles():
     all_styles: List[str] = [
-        f'{style.value}. {style.name}'.lower() for style in Style.all_styles()
+        f'{style.value}. {style.name}'.lower()
+        for style in Styles.STYLE_MAPPING.values()
     ]
     print('\n'.join(all_styles))
 
 
 def chosen_style_exists(chosen_style: str) -> bool:
-    for style in Style.all_styles():
-        if style.name.lower() == chosen_style:
-            return True
-    return False
+    return chosen_style in Styles.STYLE_MAPPING
 
 
 def handle_arguments(parser: argparse.ArgumentParser):
@@ -29,7 +27,8 @@ def handle_arguments(parser: argparse.ArgumentParser):
     if not chosen_style_exists(arguments.chosen_style):
         print('chosen style does not exist')
         return
-    show_style(Style.from_str(arguments.chosen_style), arguments.text)
+    show_style(Styles.get_style_by_name(arguments.chosen_style),
+               arguments.text)
 
 
 def init_argparser():
