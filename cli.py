@@ -21,6 +21,8 @@ def handle_arguments(arguments: argparse.Namespace):
     if arguments.show_styles:
         show_all_styles()
         return
+    if not arguments.chosen_style:
+        return
     if not chosen_style_exists(arguments.chosen_style):
         print('chosen style does not exist')
         return
