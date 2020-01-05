@@ -29,7 +29,7 @@ def handle_arguments(parser: argparse.ArgumentParser):
     if not chosen_style_exists(arguments.chosen_style):
         print('chosen style does not exist')
         return
-    print('ok')
+    show_style(Style.from_str(arguments.chosen_style), arguments.text)
 
 
 def init_argparser():
@@ -43,6 +43,9 @@ def init_argparser():
     parser.add_argument('--style',
                         action='store',
                         dest='chosen_style',
-                        help='sets formatting style for text',
-                        nargs=1)                    
+                        help='sets formatting style for text')
+    parser.add_argument('text',
+                        action='store',
+                        help='text for formatting',
+                        nargs='?')
     handle_arguments(parser)
