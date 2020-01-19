@@ -4,3 +4,4 @@ venv/
 *.pyc
 *.swp
 .mypy_cache/
+*.db
