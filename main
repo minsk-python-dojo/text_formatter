@@ -7,6 +7,6 @@ from db import init_styles_db
 
 
 if __name__ == '__main__':
-    init_styles_db()
-    init_argparser()
+    db_config = init_styles_db()
+    init_argparser(db_config)
 

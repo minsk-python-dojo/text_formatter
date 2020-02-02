@@ -16,7 +16,7 @@ def chosen_style_exists(chosen_style: str) -> bool:
     return chosen_style in Styles.STYLE_MAPPING
 
 
-def handle_arguments(parser: argparse.ArgumentParser):
+def handle_arguments(parser: argparse.ArgumentParser, db_config):
     arguments = parser.parse_args()
     if arguments.show_styles:
         show_all_styles()
@@ -31,7 +31,7 @@ def handle_arguments(parser: argparse.ArgumentParser):
                arguments.text)
 
 
-def init_argparser():
+def init_argparser(db_config):
     parser = argparse.ArgumentParser(
         description='This is parser for the formatter flags')
     parser.add_argument('-a',
@@ -47,4 +47,4 @@ def init_argparser():
                         action='store',
                         help='text for formatting',
                         nargs='?')
-    handle_arguments(parser)
+    handle_arguments(parser, db_config)
