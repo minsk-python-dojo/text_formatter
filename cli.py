@@ -4,11 +4,8 @@ from typing import List
 from formatter import Styles, show_style
 
 
-def show_all_styles():
-    all_styles: List[str] = [
-        f'{style.value}. {style.name}'.lower()
-        for style in Styles.STYLE_MAPPING.values()
-    ]
+def show_all_styles(db_config):
+    all_styles: List[str] = db_config.list()
     print('\n'.join(all_styles))
 
 
@@ -19,7 +16,7 @@ def chosen_style_exists(chosen_style: str) -> bool:
 def handle_arguments(parser: argparse.ArgumentParser, db_config):
     arguments = parser.parse_args()
     if arguments.show_styles:
-        show_all_styles()
+        show_all_styles(db_config)
         return
     if not arguments.chosen_style:
         parser.print_help()
